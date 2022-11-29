@@ -1,0 +1,7 @@
+.selected {
+    @apply bg-slate-300;
+}
+
+.option {
+    @apply rounded py-2 ring-1 ring-slate-700 flex justify-center cursor-pointer;
+}

@@ -1,0 +1,12 @@
+<div class="grid grid-flow-row gap-4">
+    <input autocomplete="off" [(ngModel)]="activity.ticket" (ngModelChange)="activityChange.emit(activity)" type=" text" placeholder="Ticket" name="ticket" class="ring-1 ring-slate-700 rounded px-4 py-2">
+    <input autocomplete="off" [(ngModel)]="activity.durationMinutes" (ngModelChange)="activityChange.emit(activity)" type="number" placeholder="Duration" name="duration" class="ring-1 ring-slate-700 rounded px-4 py-2">
+    <div class="grid gap-4 grid-cols-2">
+        <div (click)="activity.type = 'development'; activityChange.emit(activity);" class="grow option" [class.selected]="activity.type === 'development'">Development</div>
+        <div (click)="activity.type = 'meeting'; activityChange.emit(activity);" class="grow option"[class.selected]="activity.type === 'meeting'">Meeting</div>
+    </div>
+    <div class="grid gap-4 grid-cols-2">
+        <div (click)="activity.location = 'mobile'; activityChange.emit(activity);" class="grow option"[class.selected]="activity.location === 'mobile'">Mobile</div>
+        <div (click)="activity.location = 'company'; activityChange.emit(activity);" class="grow option" [class.selected]="activity.location === 'company'">Company</div>
+    </div>
+</div>

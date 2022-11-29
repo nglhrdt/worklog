@@ -1,0 +1,11 @@
+.nav-container {
+    @apply bg-white grid grid-cols-4 divide-x;
+
+    .nav-item {
+        @apply p-2 text-center cursor-pointer hover:bg-slate-300 overflow-hidden whitespace-nowrap text-ellipsis;
+    }
+}
+
+.active {
+    @apply bg-slate-200;
+}

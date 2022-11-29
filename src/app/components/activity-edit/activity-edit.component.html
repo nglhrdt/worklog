@@ -1,0 +1,16 @@
+<div class="card flex flex-col gap-4">
+    <ng-container  *ngIf="activity; else noActivity">
+        <div class="card-title">Update</div>
+        <app-activity-form [(activity)]="activity"></app-activity-form>
+        <div class="grid gap-4 grid-cols-1 lg:grid-cols-4">
+            <app-button (click)="update(activity)">Save</app-button>
+            <app-button (click)="delete(activity)">Delete</app-button>
+            <app-button (click)="applyOpenTime(activity)">Add open Time</app-button>
+            <app-button appBackButton>Cancel</app-button>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #noActivity>
+    <span id="no-activity-message">No activity</span>
+</ng-template>

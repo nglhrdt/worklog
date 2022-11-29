@@ -1,0 +1,18 @@
+<div class="card grid gap-4">
+    <div class="card-title">{{now | date : 'LLLL'}}</div>
+    <div>
+        <div class="grid grid-cols-7 divide-x bg-white">
+            <div *ngFor="let day of headerRow" class="aspect-square flex justify-center items-center">
+                <div class="w-full h-full flex items-center justify-center font-semibold">{{day | date : 'EEEEEE'}}
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-7 divide-x divide-y bg-white">
+            <div *ngFor="let day of days" class="aspect-square flex justify-center items-center cursor-pointer"
+                (click)="onDayClick(day)">
+                <div class="w-full h-full flex items-center justify-center" [class.selected]="day.selected">{{day.day |
+                    date : 'd'}}</div>
+            </div>
+        </div>
+    </div>
+</div>

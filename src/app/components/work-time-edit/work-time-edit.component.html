@@ -1,0 +1,68 @@
+<div class="grid gap-4">
+    <div class="card">
+        <ng-container *ngIf="workTime$ | async as workTime">
+            <div class="flex flex-col gap-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
+                    <div class="grid grid-cols-edit-data-grid gap-2 items-stretch">
+                        <div class="font-semibold col-start-1">Start</div>
+
+                        <app-button class="col-start-1" (click)="workTime.incrementHourStart()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </app-button>
+                        <app-button class="col-start-3" (click)="workTime.incrementMinuteStart()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </app-button>
+
+                        <input [(ngModel)]="workTime.startHours" type="number"
+                            class="w-full ring-slate-700 ring-1 rounded text-center">
+                        <div>:</div>
+                        <input [(ngModel)]="workTime.startMinutes" type="number"
+                            class="w-full ring-slate-700 ring-1 rounded text-center">
+
+                        <app-button class="col-start-1" (click)="workTime.decrementHourStart()">
+                            <fa-icon [icon]="faMinus"></fa-icon>
+                        </app-button>
+                        <app-button class="col-start-3" (click)="workTime.decrementMinuteStart()">
+                            <fa-icon [icon]="faMinus"></fa-icon>
+                        </app-button>
+                    </div>
+
+                    <div *ngIf="workTime.hasEnd" class="grid grid-cols-edit-data-grid gap-2 items-stretch">
+                        <div class="font-semibold col-start-1">End</div>
+
+                        <app-button class="col-start-1" (click)="workTime.incrementHourEnd()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </app-button>
+                        <app-button class="col-start-3" (click)="workTime.incrementMinuteEnd()">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </app-button>
+
+                        <input [(ngModel)]="workTime.endHours" type="number"
+                            class="w-full ring-slate-700 ring-1 rounded text-center">
+                        <div>:</div>
+                        <input [(ngModel)]="workTime.endMinutes" type="number"
+                            class="w-full ring-slate-700 ring-1 rounded text-center">
+
+                        <app-button class="col-start-1" (click)="workTime.decrementHourEnd()">
+                            <fa-icon [icon]="faMinus"></fa-icon>
+                        </app-button>
+                        <app-button class="col-start-3" (click)="workTime.decrementMinuteEnd()">
+                            <fa-icon [icon]="faMinus"></fa-icon>
+                        </app-button>
+                    </div>
+                </div>
+
+                <app-button (click)="saveChanges(workTime)">Save</app-button>
+
+                <app-button class="bg-red-500 text-white" (click)="delete(workTime)">
+                    <div class="flex gap-4 flex-row">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                        <span>Delete</span>
+                    </div>
+                </app-button>
+            </div>
+        </ng-container>
+    </div>
+
+    <app-button appBackButton>Back</app-button>
+</div>

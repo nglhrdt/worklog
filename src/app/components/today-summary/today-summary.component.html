@@ -1,0 +1,8 @@
+<div class="flex flex-row justify-between">
+    <div class="card-title mb-4">Today Summary</div>
+    <app-stamp></app-stamp>
+</div>
+<div>Present since {{presenceMinutes$ | async | minutesToHoursAndMinutes}}</div>
+<div>Presence in week {{presenceMinutesWeek$ | async | minutesToHoursAndMinutes}}</div>
+<div>{{openTime$ | async | minutesToHoursAndMinutes}} until evening</div>
+<div>Evening possible at {{eveningDate$ | async | date : 'shortTime'}} </div>

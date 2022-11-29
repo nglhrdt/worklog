@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.main-layout-grid {
+    @apply grid grid-cols-1 place-items-start justify-items-stretch gap-4 p-4 lg:grid-cols-2 lg:w-1/2 lg:mx-auto;
+}
+
+.card {
+    @apply p-4 border border-slate-300 rounded-lg drop-shadow-lg bg-white;
+
+    .card-title {
+        @apply font-bold text-slate-700 text-lg;
+    }
+}

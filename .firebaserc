@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "worklog-802ba": {
+      "hosting": {
+        "worklog": [
+          "worklog-802ba"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "worklog-802ba"
+  }
+}

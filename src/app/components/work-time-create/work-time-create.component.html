@@ -1,0 +1,18 @@
+<div class="grid gap-4 lg:grid-cols-3">
+    <app-day-selection (selectionChanged)="onSelectionChanged($event)"></app-day-selection>
+    <div *ngIf="selection?.length" class="card">
+        <div class="grid gap-4">
+            <ng-container *ngIf="start">
+                <div class="card-title">{{start | date : 'shortDate'}} <ng-container *ngIf="end"> - {{end | date : 'shortDate'}}</ng-container></div>
+                <app-button (click)="create('vacation')">Vacation</app-button>
+                <app-button (click)="create('sick')">Sick</app-button>
+            </ng-container>
+        </div>
+    </div>
+    <div class="card" *ngIf="workTimeList$ | async as workTimeList">
+        <div class="card-title">Work time list</div>
+        <div class="grid grid-flow-row gap-4 pt-4">
+          <app-work-time-details [workTime]="workTime" *ngFor="let workTime of workTimeList"></app-work-time-details>
+        </div>
+    </div>
+</div>

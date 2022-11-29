@@ -1,0 +1,18 @@
+<div class="grid gap-4">
+    <select class="ring-1 ring-slate-300 rounded-lg drop-shadow-lg p-4 bg-white" [(ngModel)]="selectedOption"
+        (ngModelChange)="onSelectionChange()">
+        <option *ngFor="let option of selectBoxOptions" [ngValue]="option">{{option.label}}</option>
+    </select>
+
+    <ng-container *ngIf="activitiesByDayList$ | async as activitiesByDayList">
+        <app-button (click)="copyToClipboard(activitiesByDayList)">Copy to clipboard</app-button>
+
+        <ng-container *ngFor="let activitiesByDay of activitiesByDayList">
+            <div *ngIf="activitiesByDay.activities.length" class="card grid grid-cols-1 gap-4 lg:grid-cols-2">
+                <div class="card-title lg:col-span-2">{{activitiesByDay.date | date: 'shortDate'}}</div>
+                <app-activity-details [activity]="activity" *ngFor="let activity of activitiesByDay.activities">
+                </app-activity-details>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

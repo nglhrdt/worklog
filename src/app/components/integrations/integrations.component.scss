@@ -1,0 +1,11 @@
+.label {
+    @apply font-bold;
+}
+
+form {
+    @apply grid gap-4
+}
+
+input {
+    @apply border-slate-700 rounded border;
+}

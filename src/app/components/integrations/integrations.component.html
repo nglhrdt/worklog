@@ -1,0 +1,16 @@
+<div class="card">
+    <ng-container *ngIf="integration$ | async as integration">
+        <div class="card-title">Jira Integration</div>
+        <form (ngSubmit)="saveIntegration(integration)">
+            <span class="label">Host</span>
+            <input type="text" name="host" [(ngModel)]="integration.host">
+            <span class="label">Project key</span>
+            <input type="text" name="projectKey" [(ngModel)]="integration.projectKey">
+            <span class="label">Email</span>
+            <input type="email" name="email" [(ngModel)]="integration.email">
+            <span class="label">Api Key</span>
+            <input type="password" name="apiKey" [(ngModel)]="integration.apiKey">
+            <input class="cursor-pointer bg-slate-300 hover:bg-slate-400" type="submit" value="Save">
+        </form>
+    </ng-container>
+</div>

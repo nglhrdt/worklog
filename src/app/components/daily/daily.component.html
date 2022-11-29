@@ -1,0 +1,12 @@
+<div class="card grid gap-4">
+    <div class="card-title lg:col-span-2">Daily</div>
+    <ng-container *ngIf="activities$ | async as activities">
+        <ng-container *ngIf="activities?.length; else noActivities">
+            <app-activity-details *ngFor="let activity of activities" [activity]="activity"></app-activity-details>
+        </ng-container>
+    </ng-container>
+</div>
+
+<ng-template #noActivities>
+    <span id="no-activities-message">Work today and come back tomorrow. ;-)</span>
+</ng-template>
