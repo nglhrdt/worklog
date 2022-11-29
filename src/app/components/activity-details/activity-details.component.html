@@ -1,6 +1,6 @@
 <div class="flex flex-col card hover:shadow-xl cursor-pointer" routerLink="/activities/{{activity.id}}">
     <div class="flex flex-row gap-2">
-        <fa-icon [icon]="activity.location === 'mobile' ? faHome : faBuilding"></fa-icon>
+        <fa-icon [icon]="activity.type === 'meeting' ? meeting : development"></fa-icon>
         <div class="font-semibold overflow-hidden whitespace-nowrap text-ellipsis">{{activity.ticket}}</div>
     </div>
     <div class="italic overflow-hidden whitespace-nowrap text-ellipsis" [title]="activity.summary" *ngIf="activity.summary">{{activity.summary}}</div>

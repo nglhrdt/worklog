@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faBuilding, faHome, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faLaptopCode, faUsersBetweenLines } from '@fortawesome/free-solid-svg-icons';
 import { Activity } from 'src/app/models/activity';
 import { MinutesToHoursAndMinutesPipe } from 'src/app/pipes/minutes-to-hours-and-minutes.pipe';
 
@@ -16,7 +16,6 @@ import { MinutesToHoursAndMinutesPipe } from 'src/app/pipes/minutes-to-hours-and
 })
 export class ActivityDetailsComponent {
   @Input() activity!: Activity;
-  faTrash = faTrash;
-  faHome = faHome;
-  faBuilding = faBuilding;
+  development = faLaptopCode;
+  meeting = faUsersBetweenLines;
 }
