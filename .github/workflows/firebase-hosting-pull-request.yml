@@ -9,6 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - run: node scripts/create-prod-environment.js
+        env:
+          PRODUCTION_ENVIRONMENT: '${{ secrets.PRODUCTION_ENVIRONMENT }}'
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
