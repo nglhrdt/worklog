@@ -1,14 +1,14 @@
 {
   "targets": {
-    "worklog-802ba": {
+    "worklog-cf985": {
       "hosting": {
         "worklog": [
-          "worklog-802ba"
+          "worklog-cf985"
         ]
       }
     }
   },
   "projects": {
-    "default": "worklog-802ba"
+    "default": "worklog-cf985"
   }
 }

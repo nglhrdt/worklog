@@ -107,8 +107,8 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "worklog:build:production",
-            "firebaseProject": "worklog-802ba",
-            "firebaseHostingSite": "worklog-802ba"
+            "firebaseProject": "worklog-cf985",
+            "firebaseHostingSite": "worklog-cf985"
           }
         }
       }
