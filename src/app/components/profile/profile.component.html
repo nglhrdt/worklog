@@ -2,7 +2,7 @@
     <div class="flex items-center gap-4">
         <img *ngIf="user.photoURL" class="rounded-full ring-slate-700 ring-2 h-8" [src]="user.photoURL" referrerpolicy="no-referrer">
         <div class="font-semibold text-slate-700">{{user.displayName ? user.displayName : user.email}}</div>
-        <div class="px-4 cursor-pointer" routerLink="/integrations">
+        <div class="px-4 cursor-pointer text-slate-700" routerLink="/integrations">
           <fa-icon [icon]="integrationIcon">Integrations</fa-icon>
         </div>
     </div>
