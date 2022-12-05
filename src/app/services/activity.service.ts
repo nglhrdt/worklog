@@ -89,6 +89,9 @@ export class ActivityService {
   }
 
   update(activity: Activity): Promise<void> {
+    if (activity.hasOwnProperty('summary') && !activity.summary) {
+      delete activity.summary;
+    }
     return updateDoc(doc(this.firestore, `${this.activityCollectionName}/${activity.id}`), { ...activity });
   }
 
