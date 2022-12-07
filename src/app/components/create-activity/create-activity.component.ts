@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { startOfToday } from 'date-fns';
 import { Subject, takeUntil } from 'rxjs';
 import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
+import { LocationService } from 'src/app/services/location.service';
 import { WorkTimeService } from 'src/app/services/work-time.service';
 import { ActivityFormComponent } from '../activity-form/activity-form.component';
 import { ButtonComponent } from '../button/button.component';
@@ -19,8 +21,12 @@ export class CreateActivityComponent implements OnDestroy {
 
   private onDestroy$ = new Subject<void>();
 
-  constructor(private activityService: ActivityService, private workTimeService: WorkTimeService) {
-    this.activity = Activity.emptyActivity('mobile');
+  constructor(
+    private activityService: ActivityService,
+    private workTimeService: WorkTimeService,
+    private locationService: LocationService,
+  ) {
+    this.activity = this.emptyActivity();
     this.workTimeService
       .getNormalizedOpenWorkTime$()
       .pipe(takeUntil(this.onDestroy$))
@@ -36,7 +42,17 @@ export class CreateActivityComponent implements OnDestroy {
     if (this.activity.durationMinutes > 0 && this.activity.ticket) {
       this.activityService
         .create(activity)
-        .then(() => this.activity = Activity.emptyActivity(activity.location));
+        .then(() => this.activity = this.emptyActivity());
     }
+  }
+
+  private emptyActivity(): Activity {
+      return new Activity(
+          startOfToday(),
+          '',
+          0,
+          this.locationService.getLocation(),
+          'development',
+      );
   }
 }
