@@ -1,5 +1,3 @@
-import { startOfToday } from "date-fns";
-
 export class Activity {
     constructor(
         public date: Date,
@@ -10,16 +8,6 @@ export class Activity {
         public id?: string,
         public summary?: string,
     ) { }
-
-    static emptyActivity(location: WorkingLocation): Activity {
-        return new Activity(
-            startOfToday(),
-            '',
-            0,
-            location,
-            'development',
-        );
-    }
 
     addDuration(minutes: number): void {
         this.durationMinutes += minutes;
