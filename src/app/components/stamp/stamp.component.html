@@ -1,5 +1,5 @@
 <div class="flex flex-row gap-4" *ngIf="{workTime: lastWorkTimeEntry$ | async } as model">
     <app-button (click)="workTimeService.stamp(-1)">-1</app-button>
 
-    <app-button (click)="workTimeService.stamp()">{{model.workTime ? model.workTime.end ? 'Start' : 'Stop' : 'Start'}}</app-button>
+    <app-button (click)="stamp()">{{model.workTime ? model.workTime.end ? 'Start' : 'Stop' : 'Start'}}</app-button>
 </div>

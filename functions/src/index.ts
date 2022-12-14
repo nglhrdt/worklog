@@ -65,3 +65,11 @@ exports.createUserObject = functions
       doc.set({integrations: {}});
       return null;
     });
+
+exports.stamp = functions
+    .region("europe-west1")
+    .https
+    .onCall((data, context) => {
+      functions.logger.info(data);
+      functions.logger.info(context);
+    });
