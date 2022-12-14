@@ -67,9 +67,17 @@ exports.createUserObject = functions
     });
 
 exports.stamp = functions
-    .region("europe-west1")
     .https
     .onCall((data, context) => {
-      functions.logger.info(data);
-      functions.logger.info(context);
+      if (context.auth) {
+        // Authentication / user information is automatically added to the request.
+        const uid = context.auth.uid;
+        const name = context.auth.token.name || null;
+        const picture = context.auth.token.picture || null;
+        const email = context.auth.token.email || null;
+        functions.logger.info(uid);
+        functions.logger.info(name);
+        functions.logger.info(picture);
+        functions.logger.info(email);
+      }
     });
