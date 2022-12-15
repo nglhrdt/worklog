@@ -22,6 +22,6 @@ export class StampComponent {
 
   stamp() {
     this.isButtonDisabled = true;
-    httpsCallable(this.functions, 'stamp')().finally(() => this.isButtonDisabled = false);
+    httpsCallable(this.functions, 'stamp')().finally(() => { this.isButtonDisabled = false; console.warn('stamped') });
   }
 }

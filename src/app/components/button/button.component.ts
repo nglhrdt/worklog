@@ -1,10 +1,17 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   standalone: true,
   imports: [CommonModule],
-  template: `<div class="flex justify-center rounded-lg ring-slate-700 bg-slate-500 text-white ring-1 py-1 px-2 cursor-pointer hover:bg-slate-300"><ng-content></ng-content></div>`,
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss']
 })
-export class ButtonComponent { }
+export class ButtonComponent {
+  @Input() disabled: boolean = false;
+
+  onClick(event: Event): void {
+    if (this.disabled) event.stopPropagation();
+  }
+}
