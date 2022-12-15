@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from '@angular/fire/auth-guard';
 import { registerLocaleData } from '@angular/common';
 import { connectFunctionsEmulator, getFunctions, provideFunctions } from '@angular/fire/functions';
-import { REGION, ORIGIN } from '@angular/fire/compat/functions';
 
 import localeDe from '@angular/common/locales/de';
 
@@ -57,8 +56,6 @@ registerLocaleData(localeDe, 'de-DE');
   providers: [
     AuthGuard,
     { provide: LOCALE_ID, useValue: 'de-DE' },
-    { provide: REGION, useValue: 'europe-west1' },
-    { provide: ORIGIN, useValue: 'https://worklog-cf985.web.app' }
   ],
   bootstrap: [AppComponent]
 })
