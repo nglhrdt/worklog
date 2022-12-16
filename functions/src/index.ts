@@ -1,6 +1,10 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import fetch from "node-fetch";
+import
+{DocumentData, DocumentReference, QueryDocumentSnapshot}
+  from "firebase-admin/firestore";
+import {setSeconds, setMilliseconds} from "date-fns";
 
 admin.initializeApp();
 const db = admin.firestore();
@@ -65,3 +69,64 @@ exports.createUserObject = functions
       doc.set({integrations: {}});
       return null;
     });
+
+exports.stamp = functions
+    .region("europe-west1")
+    .https
+    .onCall(async (_, context) => {
+      if (context.auth) {
+        const uid = context.auth.uid;
+
+        const snapshot = await getLastWotkTimeEntryForUser(uid);
+
+        if (snapshot !== undefined) {
+          if (snapshot.data().end) {
+            functions.logger.info("create new");
+            await createWorkTimeEntry(uid);
+          } else {
+            functions.logger.info("update");
+            snapshot.ref.update({end: new Date()});
+          }
+        } else {
+          functions.logger.info("create initial");
+          await createWorkTimeEntry(uid);
+        }
+      }
+    });
+
+/**
+ *
+ * @param {string} userId user id to get the last entry for
+ * @return {Promise<QueryDocumentSnapshot<DocumentData> | undefined>} the
+ * last work time entry for the given user
+ */
+async function getLastWotkTimeEntryForUser(userId: string):
+  Promise<QueryDocumentSnapshot<DocumentData> | undefined> {
+  return db
+      .collection(`users/${userId}/work-times`)
+      .orderBy("start", "asc")
+      .limitToLast(1)
+      .get()
+      .then((querySnapshot) => querySnapshot.docs[0]);
+}
+
+/**
+ * get the current date without seconds
+ * @return {Date} the current date with a precision of a minute
+ */
+function getDateWithoutSeconds(): Date {
+  return setMilliseconds(setSeconds(new Date(), 0), 0);
+}
+
+/**
+ * adds a new work time entry for the given user id
+ * @param {string} userId the user id to create the entry for
+ * @return {Promise<DocumentReference<DocumentData>>} the
+ * created work time entry
+ */
+async function createWorkTimeEntry(userId: string)
+  : Promise<DocumentReference<DocumentData>> {
+  return db
+      .collection(`users/${userId}/work-times`)
+      .add({start: getDateWithoutSeconds(), type: "work"});
+}

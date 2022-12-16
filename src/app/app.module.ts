@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { connectAuthEmulator, getAuth, provideAuth } from '@angular/fire/auth';
 import { connectFirestoreEmulator, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,7 +44,7 @@ registerLocaleData(localeDe, 'de-DE');
       return (firestore);
     }),
     provideFunctions(() => {
-      const functions = getFunctions();
+      const functions = getFunctions(getApp(), 'europe-west1');
 
       if (!environment.production) {
         connectFunctionsEmulator(functions, 'localhost', 5001)
@@ -55,7 +55,7 @@ registerLocaleData(localeDe, 'de-DE');
   ],
   providers: [
     AuthGuard,
-    { provide: LOCALE_ID, useValue: 'de-DE' }
+    { provide: LOCALE_ID, useValue: 'de-DE' },
   ],
   bootstrap: [AppComponent]
 })
