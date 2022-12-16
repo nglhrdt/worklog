@@ -64,7 +64,6 @@ exports.createUserObject = functions
     .region("europe-west1")
     .auth.user()
     .onCreate((event) => {
-      functions.logger.info(event);
       const doc = admin.firestore().doc(`/users/${event.uid}`);
       doc.set({integrations: {}});
       return null;
@@ -81,14 +80,11 @@ exports.stamp = functions
 
         if (snapshot !== undefined) {
           if (snapshot.data().end) {
-            functions.logger.info("create new");
             await createWorkTimeEntry(uid);
           } else {
-            functions.logger.info("update");
             snapshot.ref.update({end: new Date()});
           }
         } else {
-          functions.logger.info("create initial");
           await createWorkTimeEntry(uid);
         }
       }
