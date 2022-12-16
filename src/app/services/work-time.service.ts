@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
-import { addDoc, collection, collectionData, deleteDoc, doc, docData, DocumentReference, Firestore, limit, limitToLast, orderBy, query, updateDoc, where, writeBatch } from '@angular/fire/firestore';
+import { collection, collectionData, deleteDoc, doc, docData, Firestore, limit, limitToLast, orderBy, query, updateDoc, where, writeBatch } from '@angular/fire/firestore';
 import { addMinutes, endOfToday, setSeconds, startOfToday, startOfTomorrow } from 'date-fns';
 import { BehaviorSubject, combineLatest, first, map, Observable, ReplaySubject, timer } from 'rxjs';
 import { workTimeConverter } from '../converters/work-time-converter';
 import { Week } from '../models/week';
-import { WorkTime, WorkTimeType } from '../models/work-time';
-import { getDateWithoutSeconds, normalizeToFifteenMinutes } from '../util/utils';
+import { WorkTime } from '../models/work-time';
+import { normalizeToFifteenMinutes, workTimesCollectionName } from '../util/utils';
 import { ActivityService } from './activity.service';
-import { workTimesCollectionName } from '../util/utils';
 
 export type PresenceState = 'present' | 'absent';
 
@@ -61,7 +60,7 @@ export class WorkTimeService {
         )
         .subscribe(openTime => this.openTimeSubject?.next(openTime));
     }
-    
+
     return this.openTimeSubject.asObservable();
   }
 
@@ -247,23 +246,6 @@ export class WorkTimeService {
     return workTimeList.reduce((duration, workTime) => duration += workTime.getDurationInMinutes(), 0);
   }
 
-  stamp(offset = 0): void {
-    this.getLastWorkTimeEntry$()
-      .pipe(first())
-      .subscribe(entry => {
-        if (!entry) {
-          this.create(offset);
-        } else {
-          if (entry.end) {
-            this.create(offset);
-          } else {
-            entry.end = addMinutes(getDateWithoutSeconds(), offset);
-            this.update(entry);
-          }
-        }
-      });
-  }
-
   getById$(workTimeId: string): Observable<WorkTime> {
     const docRef = doc(this.firestore, `${this.collectionName}/${workTimeId}`).withConverter(workTimeConverter);
     return docData(docRef, { idField: 'id' });
@@ -278,13 +260,6 @@ export class WorkTimeService {
       delete entry.end;
     }
     return updateDoc(doc(this.firestore, `${this.collectionName}/${entry.id}`), { ...entry });
-  }
-
-  private create(offset: number): Promise<DocumentReference<WorkTime>> {
-    const start = addMinutes(getDateWithoutSeconds(), offset);
-    const type: WorkTimeType = 'work';
-
-    return addDoc(collection(this.firestore, this.collectionName).withConverter(workTimeConverter), <WorkTime>{ start, type });
   }
 
   createBatch(workTimeList: WorkTime[]): Promise<void> {
