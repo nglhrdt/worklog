@@ -1,16 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { addDays, isBefore, isEqual } from 'date-fns';
-import { map, Observable, tap } from 'rxjs';
+import { cloneDeep } from 'lodash-es';
+import { map, Observable } from 'rxjs';
 import { Activity, WorkingLocation } from 'src/app/models/activity';
 import { Week } from 'src/app/models/week';
 import { ActivityService } from 'src/app/services/activity.service';
-import { ActivityDetailsComponent } from '../activity-details/activity-details.component';
-import { ButtonComponent } from '../button/button.component';
-import { cloneDeep } from 'lodash-es';
-import { normalizeToFifteenMinutes } from 'src/app/util/utils';
 import { DAILY_WORK_TIME } from 'src/app/services/work-time.service';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { normalizeToFifteenMinutes } from 'src/app/util/utils';
+import { ActivityDetailsComponent } from '../activity-details/activity-details.component';
 
 interface SelectBoxOption {
   week: Week;
@@ -25,7 +23,7 @@ interface ActivitiesByDay {
 @Component({
   selector: 'app-evaluation',
   standalone: true,
-  imports: [CommonModule, FormsModule, ActivityDetailsComponent, ButtonComponent],
+  imports: [SharedModule, ActivityDetailsComponent],
   templateUrl: 'evaluation.component.html',
 })
 export class EvaluationComponent {

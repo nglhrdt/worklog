@@ -1,7 +1,0 @@
-div {
-  @apply flex justify-center rounded-lg ring-slate-700 bg-slate-500 text-white ring-1 py-1 px-2 cursor-pointer hover:bg-slate-400 select-none;
-}
-
-.disabled {
-  @apply cursor-progress bg-slate-300 hover:bg-slate-300;
-}

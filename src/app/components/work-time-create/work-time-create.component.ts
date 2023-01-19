@@ -1,17 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { addHours, endOfDay, startOfDay } from 'date-fns';
 import { Observable } from 'rxjs';
 import { WorkTime, WorkTimeType } from 'src/app/models/work-time';
 import { WorkTimeService } from 'src/app/services/work-time.service';
-import { ButtonComponent } from '../button/button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { DaySelectionComponent } from '../day-selection/day-selection.component';
 import { WorkTimeDetailsComponent } from '../work-time-details/work-time-details.component';
 
 @Component({
   selector: 'app-work-time-create',
   standalone: true,
-  imports: [CommonModule, DaySelectionComponent, ButtonComponent, WorkTimeDetailsComponent],
+  imports: [SharedModule, DaySelectionComponent, WorkTimeDetailsComponent],
   templateUrl: './work-time-create.component.html',
   styleUrls: ['./work-time-create.component.scss']
 })

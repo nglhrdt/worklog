@@ -1,0 +1,17 @@
+<app-button class="col-start-1" (click)="incrementHours()">
+  <fa-icon [icon]="faPlus"></fa-icon>
+</app-button>
+<app-button class="col-start-3" (click)="incrementMinutes()">
+  <fa-icon [icon]="faPlus"></fa-icon>
+</app-button>
+
+<app-input-number class="col-start-1" [(value)]="hours" (valueChange)="updateHours($event)" [min]="0" [max]="23"></app-input-number>
+<div>:</div>
+<app-input-number class="col-start-3" [(value)]="minutes" (valueChange)="updateMinutes($event)" [min]="0" [max]="59"></app-input-number>
+
+<app-button class="col-start-1" (click)="decrementHours()">
+  <fa-icon [icon]="faMinus"></fa-icon>
+</app-button>
+<app-button class="col-start-3" (click)="decrementMinutes()">
+  <fa-icon [icon]="faMinus"></fa-icon>
+</app-button>

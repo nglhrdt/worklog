@@ -1,8 +1,7 @@
 import { Directive, HostListener } from '@angular/core';
-import { NavigationService } from '../services/navigation.service';
+import { NavigationService } from 'src/app/services/navigation.service';
 
 @Directive({
-  standalone: true,
   selector: '[appBackButton]'
 })
 export class BackButtonDirective {

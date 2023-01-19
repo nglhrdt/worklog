@@ -1,19 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { startOfToday } from 'date-fns';
 import { Subject, takeUntil } from 'rxjs';
 import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 import { LocationService } from 'src/app/services/location.service';
 import { WorkTimeService } from 'src/app/services/work-time.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivityFormComponent } from '../activity-form/activity-form.component';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-create-activity',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonComponent, ActivityFormComponent],
+  imports: [SharedModule, ActivityFormComponent],
   templateUrl: './create-activity.component.html',
 })
 export class CreateActivityComponent implements OnDestroy {

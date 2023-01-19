@@ -1,14 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { Activity, WorkingLocation } from 'src/app/models/activity';
-import { ButtonComponent } from '../button/button.component';
-import { FormsModule } from '@angular/forms';
 import { LocationService } from 'src/app/services/location.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-activity-form',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, FormsModule],
+  imports: [SharedModule],
   templateUrl: './activity-form.component.html',
   styleUrls: ['./activity-form.component.scss']
 })

@@ -1,19 +1,17 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { first, map, mergeMap, Subject, takeUntil } from 'rxjs';
-import { BackButtonDirective } from 'src/app/directives/back-button.directive';
 import { Activity } from 'src/app/models/activity';
 import { ActivityService } from 'src/app/services/activity.service';
 import { NavigationService } from 'src/app/services/navigation.service';
 import { WorkTimeService } from 'src/app/services/work-time.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivityFormComponent } from '../activity-form/activity-form.component';
-import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'app-activity-edit',
   standalone: true,
-  imports: [CommonModule, BackButtonDirective, ButtonComponent, ActivityFormComponent],
+  imports: [SharedModule, ActivityFormComponent],
   templateUrl: './activity-edit.component.html',
 })
 export class ActivityEditComponent implements OnDestroy {

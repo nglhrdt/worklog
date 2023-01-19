@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MinutesToHoursAndMinutesPipe } from 'src/app/pipes/minutes-to-hours-and-minutes.pipe';
 import { WorkTimeService } from 'src/app/services/work-time.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StampComponent } from '../stamp/stamp.component';
 
 @Component({
   selector: 'app-today-summary',
   standalone: true,
-  imports: [CommonModule, MinutesToHoursAndMinutesPipe, StampComponent],
+  imports: [SharedModule, MinutesToHoursAndMinutesPipe, StampComponent],
   templateUrl: './today-summary.component.html',
   providers: [MinutesToHoursAndMinutesPipe]
 })

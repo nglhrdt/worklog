@@ -1,17 +1,16 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { doc, docData, DocumentReference, Firestore, updateDoc } from '@angular/fire/firestore';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map, Observable } from 'rxjs';
 import { userConverter } from 'src/app/converters/user-converter';
 import { Integration, JiraIntegration, User } from 'src/app/models/user';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-integrations',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [SharedModule],
   templateUrl: './integrations.component.html',
   styleUrls: ['./integrations.component.scss']
 })
