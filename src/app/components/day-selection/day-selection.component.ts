@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { addDays, endOfMonth, getDate, isBefore, isEqual, isMonday, isWithinInterval, startOfMonth, subDays } from 'date-fns';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { addDays, endOfMonth, getDate, isBefore, isEqual, isMonday, isSunday, isWithinInterval, nextMonday, startOfMonth, subDays } from 'date-fns';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 interface SelectableDay { day: Date, selected: boolean }
@@ -11,25 +11,37 @@ interface SelectableDay { day: Date, selected: boolean }
   templateUrl: './day-selection.component.html',
   styleUrls: ['./day-selection.component.scss']
 })
-export class DaySelectionComponent {
+export class DaySelectionComponent implements OnInit {
   @Output() selectionChanged = new EventEmitter<Date[]>();
+  @Input() date: Date = new Date();
 
-  now: Date = new Date();
   headerRow: Date[] = [];
   days: SelectableDay[] = [];
   start?: Date;
   end?: Date;
 
   constructor() {
+  }
+
+  ngOnInit(): void {
+    const monday = nextMonday(new Date());
     for (let i = 0; i < 7; i++) {
-      this.headerRow.push(addDays(new Date, i))
+      this.headerRow.push(addDays(monday, i))
     }
 
-    const startOfMonthDate: Date = startOfMonth(new Date());
-    const endOfMonthDate: Date = endOfMonth(new Date());
+    const startOfMonthDate: Date = startOfMonth(this.date);
+    const endOfMonthDate: Date = endOfMonth(this.date);
 
     for (let i = 0; i < getDate(endOfMonthDate); i++) {
       this.days.push({ day: addDays(startOfMonthDate, i), selected: false });
+    }
+
+    if (!isSunday(endOfMonthDate)) {
+      let dateToAdd: Date = endOfMonthDate;
+      while (!isSunday(dateToAdd)) {
+        dateToAdd = addDays(dateToAdd, 1);
+        this.days.push({ day: dateToAdd, selected: false });
+      }
     }
 
     if (!isMonday(startOfMonthDate)) {
