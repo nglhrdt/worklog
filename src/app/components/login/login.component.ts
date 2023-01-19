@@ -1,15 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Auth, GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { ButtonComponent } from '../button/button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, FormsModule],
+  imports: [SharedModule],
   templateUrl: './login.component.html',
 })
 export class LoginComponent {

@@ -1,13 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Auth, signOut } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { ButtonComponent } from '../button/button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-logout',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [SharedModule],
   template: `<app-button (click)="logout()">
     <div>Logout</div>
   </app-button>`,

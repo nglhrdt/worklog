@@ -1,0 +1,10 @@
+<div (click)="onClick($event)" [class.disabled]="disabled"
+  class="flex justify-center rounded border border-slate-800  text-white py-1 px-2 cursor-pointer hover:bg-slate-400 select-none shadow hover:shadow-lg"
+  [ngClass]="{
+    'cursor-not-allowed bg-slate-200 hover:bg-slate-200 hover:shadow': disabled,
+    'bg-slate-500': mode === 'default',
+    'bg-red-600': mode === 'danger'
+  }">
+  <fa-icon *ngIf="icon" [icon]="icon" class="mr-2"></fa-icon>
+  <ng-content></ng-content>
+</div>

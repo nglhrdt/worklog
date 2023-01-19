@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { addDays, endOfMonth, getDate, isBefore, isEqual, isMonday, isWithinInterval, startOfMonth, subDays } from 'date-fns';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 interface SelectableDay { day: Date, selected: boolean }
 
 @Component({
   selector: 'app-day-selection',
   standalone: true,
-  imports: [CommonModule],
+  imports: [SharedModule],
   templateUrl: './day-selection.component.html',
   styleUrls: ['./day-selection.component.scss']
 })

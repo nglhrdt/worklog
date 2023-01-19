@@ -1,15 +1,14 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 import { Observable } from 'rxjs';
 import { WorkTime } from 'src/app/models/work-time';
 import { WorkTimeService } from 'src/app/services/work-time.service';
-import { ButtonComponent } from '../button/button.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-stamp',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [SharedModule],
   templateUrl: 'stamp.component.html',
 })
 export class StampComponent {
