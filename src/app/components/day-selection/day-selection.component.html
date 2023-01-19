@@ -1,5 +1,5 @@
 <div class="card grid gap-4">
-    <div class="card-title">{{now | date : 'LLLL'}}</div>
+    <div class="card-title">{{date | date : 'LLLL YYYY'}}</div>
     <div>
         <div class="grid grid-cols-7 divide-x bg-white">
             <div *ngFor="let day of headerRow" class="aspect-square flex justify-center items-center">
