@@ -32,7 +32,7 @@ export class EvaluationComponent {
   activitiesByDayList$: Observable<ActivitiesByDay[]>;
 
   constructor(private activityService: ActivityService) {
-    this.selectBoxOptions = [new Week(), new Week(-1), new Week(-2)].map(this.weekToSelectBoxOption)
+    this.selectBoxOptions = [new Week(), new Week(-1), new Week(-2), new Week(-3), new Week(-4), new Week(-5)].map(this.weekToSelectBoxOption);
     this.selectedOption = this.selectBoxOptions[0];
     this.activitiesByDayList$ = this.getActivitiesByDay$();
   }
